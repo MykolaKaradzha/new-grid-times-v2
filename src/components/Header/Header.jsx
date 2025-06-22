@@ -68,9 +68,14 @@ const MainHeader = styled(MaxWidthWrapper)`
   margin-top: 32px;
   margin-bottom: 48px;
 
-  @media ${QUERIES.desktopAndUp} {
+  @media ${QUERIES.tabletAndUp} {
+    margin-bottom: 60px;
+  }
+
+  @media ${QUERIES.laptopAndUp} {
     align-items: baseline;
     justify-content: space-between;
+    margin-bottom: 72px;
   }
 `;
 
@@ -81,7 +86,7 @@ const ActionGroup = styled.div`
   ${MainHeader} & {
     display: none;
 
-    @media ${QUERIES.desktopAndUp} {
+    @media ${QUERIES.laptopAndUp} {
       display: flex;
     }
   }
@@ -98,7 +103,7 @@ const ActionGroup = styled.div`
 const SubscribeButtonWrapper = styled.div`
   display: none;
 
-  @media ${QUERIES.desktopAndUp} {
+  @media ${QUERIES.laptopAndUp} {
     display: flex;
     flex-direction: column;
     align-items: center;
