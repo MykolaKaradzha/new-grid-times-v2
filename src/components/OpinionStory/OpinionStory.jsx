@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const OpinionStory = ({ id, title, author, avatar }) => {
   return (
@@ -20,11 +20,16 @@ const Wrapper = styled.article`
 `;
 
 const Avatar = styled.img`
+  float: right;
   display: block;
   width: 48px;
   height: 48px;
   border-radius: 50%;
   object-fit: cover;
+
+  @media ${QUERIES.tabletOnly} {
+    float: none;
+  }
 `;
 
 const AuthorName = styled.p`
