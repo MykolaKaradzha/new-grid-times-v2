@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { QUERIES } from "../../constants";
+
 
 const OpinionStory = ({ id, title, author, avatar }) => {
   return (
@@ -28,7 +30,7 @@ const Avatar = styled.img`
   object-fit: cover;
 
   @media ${QUERIES.tabletOnly} {
-    float: none;
+    float: revert;
   }
 `;
 
