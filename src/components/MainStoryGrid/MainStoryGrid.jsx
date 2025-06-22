@@ -47,17 +47,9 @@ const MainStoryGrid = () => {
   );
 };
 
-const Divider = styled.span`
-  display: block;
-  border-top: 1px solid ${COLORS.gray[300]};
-  margin: 16px 0;
-
-  @media ${QUERIES.tabletOnly} {
-    display: none;
-  } 
-`;
-
 const Wrapper = styled.div`
+  --diviver-spacing: 16px;
+
   display: grid;
   grid-template-areas:
     "main-story"
@@ -66,27 +58,84 @@ const Wrapper = styled.div`
     "advertisement";
   gap: 48px;
   margin-bottom: 48px;
+
+  @media ${QUERIES.tabletAndUp} {
+    column-gap: 0;
+  }
+
+  @media ${QUERIES.tabletOnly} {
+    grid-template-areas:
+      "main-story main-story secondary-stories"
+      "main-story main-story secondary-stories"
+      "advertisement advertisement advertisement"
+      "opinion-stories opinion-stories opinion-stories";
+  }
+
+  @media ${QUERIES.laptopAndUp} {
+    row-gap: 0;
+    grid-template-areas:
+      "main-story main-story main-story secondary-stories opinion-stories"
+      "main-story main-story main-story secondary-stories opinion-stories"
+      "main-story main-story main-story advertisement advertisement";
+  }
 `;
 
 const MainStorySection = styled.section`
   grid-area: main-story;
+
+  @media ${QUERIES.tabletAndUp} {
+    padding-right: var(--diviver-spacing);
+    border-right: 1px solid ${COLORS.gray[300]};
+  }
 `;
 
 const SecondaryStorySection = styled.section`
   grid-area: secondary-stories;
+  @media ${QUERIES.tabletAndUp} {
+    padding: 0 var(--diviver-spacing);
+    border-right: 1px solid ${COLORS.gray[300]};
+  }
+`;
+
+const OpinionSection = styled.section`
+  grid-area: opinion-stories;
+  @media ${QUERIES.tabletAndUp} {
+    padding-left: 16px;
+  }
 `;
 
 const StoryList = styled.div`
   display: flex;
   flex-direction: column;
-`;
 
-const OpinionSection = styled.section`
-  grid-area: opinion-stories;
+  @media ${QUERIES.tabletOnly} {
+    ${OpinionSection} & {
+      flex-direction: row;
+      gap: 32px;
+    }
+  }
 `;
 
 const AdvertisementSection = styled.section`
   grid-area: advertisement;
+  @media ${QUERIES.laptopAndUp} {
+    margin-left: var(--diviver-spacing);
+    margin-top: var(--diviver-spacing);
+    padding-top: var(--diviver-spacing);
+    border-top: solid 1px ${COLORS.gray[300]};
+  }
+`;
+
+const Divider = styled.span`
+  display: block;
+  border-top: 1px solid ${COLORS.gray[300]};
+  margin: var(--diviver-spacing) 0;
+
+  @media ${QUERIES.tabletOnly} {
+    ${OpinionSection} & {
+      display: none;
+    }
+  }
 `;
 
 export default MainStoryGrid;
