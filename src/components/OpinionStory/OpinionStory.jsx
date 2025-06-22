@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { QUERIES } from "../../constants";
 
-
 const OpinionStory = ({ id, title, author, avatar }) => {
   return (
     <a href={`/story/${id}`}>
@@ -18,11 +17,19 @@ const OpinionStory = ({ id, title, author, avatar }) => {
 };
 
 const Wrapper = styled.article`
-  color: var(--color-gray-900);
+  color: var(--color-gray-900);    
+  display: flex;
+  gap: 16px;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+
+  @media ${QUERIES.tabletOnly} {
+    flex-direction: column;
+    max-width: 20ch;
+  }
 `;
 
 const Avatar = styled.img`
-  float: right;
   display: block;
   width: 48px;
   height: 48px;
@@ -44,7 +51,8 @@ const AuthorName = styled.p`
 const ArticleTitle = styled.h3`
   font-size: 1.125rem;
   font-weight: var(--font-weight-bold);
-  line-height: 1.3;
+  line-height: 1.3;   
+   max-width: 25ch;
 `;
 
 export default OpinionStory;
