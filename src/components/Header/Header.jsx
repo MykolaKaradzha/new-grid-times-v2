@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Menu, Search, User } from "react-feather";
-import { QUERIES } from "../../constants";
+import { COLORS, QUERIES } from "../../constants";
 import MaxWidthWrapper from "../MaxWidthWrapper";
 import Logo from "../Logo";
 import Button from "../Button";
@@ -26,20 +26,20 @@ const Header = () => {
         </Row>
       </SuperHeader>
       <MainHeader>
-        <ActionGroup>
+        <DesktopActionGroup>
           <button>
             <Search size={24} />
           </button>
           <button>
             <Menu size={24} />
           </button>
-        </ActionGroup>
+        </DesktopActionGroup>
 
         <Logo />
 
         <SubscribeButtonWrapper>
           <Button>Subscribe</Button>
-          <Link>Already a subscriber?</Link>
+          <Link href="/">Already a subscriber?</Link>
         </SubscribeButtonWrapper>
       </MainHeader>
     </header>
@@ -51,7 +51,7 @@ const SuperHeader = styled.div`
   background: var(--color-gray-900);
   color: white;
 
-  @media ${QUERIES.desktopAndUp} {
+  @media ${QUERIES.laptopAndUp} {
     display: none;
   }
 `;
@@ -69,27 +69,22 @@ const MainHeader = styled(MaxWidthWrapper)`
   margin-bottom: 48px;
 
   @media ${QUERIES.tabletAndUp} {
-    margin-bottom: 60px;
+    margin-top: 48px;
+    margin-bottom: 72px;
   }
 
   @media ${QUERIES.laptopAndUp} {
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 72px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    justify-content: revert;
+    margin-top: 16px;
   }
 `;
 
 const ActionGroup = styled.div`
   display: flex;
   gap: 24px;
-
-  ${MainHeader} & {
-    display: none;
-
-    @media ${QUERIES.laptopAndUp} {
-      display: flex;
-    }
-  }
 
   /*
     FIX: Remove the inline spacing that comes with
@@ -100,10 +95,20 @@ const ActionGroup = styled.div`
   }
 `;
 
+const DesktopActionGroup = styled(ActionGroup)`
+  display: none;
+
+  @media ${QUERIES.laptopAndUp} {
+    display: flex;
+  }
+`;
+
 const SubscribeButtonWrapper = styled.div`
   display: none;
 
   @media ${QUERIES.laptopAndUp} {
+    justify-self: end;
+    align-self: end;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -113,8 +118,10 @@ const SubscribeButtonWrapper = styled.div`
 
 const Link = styled.a`
   font-size: ${14 / 16}rem;
-  text-decoration: underline;
   font-style: italic;
+  color: ${COLORS.gray[900]};
+
+  text-decoration: underline;
 `;
 
 export default Header;
