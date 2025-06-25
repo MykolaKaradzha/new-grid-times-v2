@@ -20,10 +20,9 @@ const MainStoryGrid = () => {
       <SecondaryStorySection>
         <StoryList>
           {SECONDARY_STORIES.map((story, index) => (
-            <>
-              <SecondaryStory key={story.id} {...story} />
-              {index !== SECONDARY_STORIES.length - 1 && <Divider />}
-            </>
+            <VerticalStoryWrapper key={story.id}>
+              <SecondaryStory {...story} />
+            </VerticalStoryWrapper>
           ))}
         </StoryList>
       </SecondaryStorySection>
@@ -32,10 +31,9 @@ const MainStoryGrid = () => {
         <SectionTitle>Opinion</SectionTitle>
         <StoryList>
           {OPINION_STORIES.map((story, index) => (
-            <>
-              <OpinionStory key={story.id} {...story} />
-              {index !== OPINION_STORIES.length - 1 && <Divider />}
-            </>
+            <OpinionStoryWrapper key={story.id}>
+              <OpinionStory  {...story} />
+            </OpinionStoryWrapper>
           ))}
         </StoryList>
       </OpinionSection>
@@ -48,7 +46,7 @@ const MainStoryGrid = () => {
 };
 
 const Wrapper = styled.div`
-  --diviver-spacing: 16px;
+  --divider-spacing: 16px;
 
   display: grid;
   grid-template-areas:
@@ -61,39 +59,36 @@ const Wrapper = styled.div`
 
   @media ${QUERIES.tabletAndUp} {
     column-gap: 0;
-  }
 
-  @media ${QUERIES.tabletOnly} {
     grid-template-areas:
-      "main-story main-story secondary-stories"
-      "main-story main-story secondary-stories"
-      "advertisement advertisement advertisement"
-      "opinion-stories opinion-stories opinion-stories";
+      "main-story secondary-stories"
+      "main-story secondary-stories"
+      "advertisement advertisement"
+      "opinion-stories opinion-stories";
+    grid-template-columns: 2fr 1fr;
   }
 
   @media ${QUERIES.laptopAndUp} {
     row-gap: 0;
+    grid-template-columns: 5fr 4fr 3fr;
     grid-template-areas:
-      "main-story main-story main-story secondary-stories opinion-stories"
-      "main-story main-story main-story secondary-stories opinion-stories"
-      "main-story main-story main-story advertisement advertisement";
+      "main-story secondary-stories opinion-stories"
+      "main-story advertisement advertisement";
   }
 `;
 
 const MainStorySection = styled.section`
   grid-area: main-story;
 
-  @media ${QUERIES.tabletAndUp} {
-    padding-right: var(--diviver-spacing);
-    border-right: 1px solid ${COLORS.gray[300]};
-  }
 `;
 
 const SecondaryStorySection = styled.section`
   grid-area: secondary-stories;
+
   @media ${QUERIES.tabletAndUp} {
-    padding: 0 var(--diviver-spacing);
-    border-right: 1px solid ${COLORS.gray[300]};
+    padding-left: var(--divider-spacing);
+    margin-left: var(--divider-spacing);
+    border-left: 1px solid ${COLORS.gray[300]};
   }
 `;
 
@@ -101,6 +96,13 @@ const OpinionSection = styled.section`
   grid-area: opinion-stories;
   @media ${QUERIES.tabletAndUp} {
     padding-left: 16px;
+  }
+
+  @media ${QUERIES.laptopAndUp} {
+    margin-top: -9px;
+    padding-left: var(--divider-spacing);
+    margin-left: var(--divider-spacing);
+    border-left: 1px solid ${COLORS.gray[300]};
   }
 `;
 
@@ -119,21 +121,29 @@ const StoryList = styled.div`
 const AdvertisementSection = styled.section`
   grid-area: advertisement;
   @media ${QUERIES.laptopAndUp} {
-    margin-left: var(--diviver-spacing);
-    margin-top: var(--diviver-spacing);
-    padding-top: var(--diviver-spacing);
+    margin-left: var(--divider-spacing);
+    margin-top: var(--divider-spacing);
+    padding-top: var(--divider-spacing);
     border-top: solid 1px ${COLORS.gray[300]};
   }
 `;
 
-const Divider = styled.span`
-  display: block;
-  border-top: 1px solid ${COLORS.gray[300]};
-  margin: var(--diviver-spacing) 0;
+const VerticalStoryWrapper = styled.div`
+  &:not(:last-of-type) {
+    border-bottom: 1px solid ${COLORS.gray[300]};
+    padding-bottom: var(--divider-spacing);
+    margin-bottom: var(--divider-spacing);
+  }
+`;
 
+const OpinionStoryWrapper = styled(VerticalStoryWrapper)`
   @media ${QUERIES.tabletOnly} {
-    ${OpinionSection} & {
-      display: none;
+    flex: 1;
+
+    &:not(:last-of-type) {
+      border-bottom: revert;
+      padding-bottom: revert;
+      margin-bottom: revert;
     }
   }
 `;

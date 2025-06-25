@@ -25,7 +25,6 @@ const Wrapper = styled.article`
 
   @media ${QUERIES.tabletOnly} {
     grid-template-columns: 1fr;
-    width: min-content;
 
     grid-template-areas:
       "image"
@@ -41,11 +40,6 @@ const Image = styled.img`
   height: 120px;
   border-radius: 4px;
   object-fit: cover;
-
-  @media ${QUERIES.tabletOnly} {
-    object-fit: contain;
-    width: revert;
-  }
 `;
 
 const Heading = styled.h2`

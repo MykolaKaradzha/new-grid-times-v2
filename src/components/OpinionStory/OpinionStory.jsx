@@ -35,10 +35,6 @@ const Avatar = styled.img`
   height: 48px;
   border-radius: 50%;
   object-fit: cover;
-
-  @media ${QUERIES.tabletOnly} {
-    float: revert;
-  }
 `;
 
 const AuthorName = styled.p`
